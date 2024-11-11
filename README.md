@@ -29,3 +29,8 @@ The motors and sensors to be managed by software:
 * Rotate Hand to value
 * Set rollers to Intake/Eject/None
 
+## Reference
+[CTRE documentation for the Talon FX motor controller](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/talonfx-control-intro.html). Pay special attention to the following sections:
+* [Closed-Loop Overview](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/closed-loop-requests.html)
+* [Basic PID and Profiling](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/basic-pid-control.html)
+* [Motion Magic Controls](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/motion-magic.html)
