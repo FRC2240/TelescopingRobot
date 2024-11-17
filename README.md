@@ -34,3 +34,7 @@ The motors and sensors to be managed by software:
 * [Closed-Loop Overview](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/closed-loop-requests.html)
 * [Basic PID and Profiling](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/basic-pid-control.html)
 * [Motion Magic Controls](https://v6.docs.ctr-electronics.com/en/stable/docs/api-reference/device-specific/talonfx/motion-magic.html)
+
+Example Code
+* [Position Closed-Loop](https://github.com/CrossTheRoadElec/Phoenix6-Examples/tree/main/cpp/PositionClosedLoop)
+* [Motion Magic](https://github.com/CrossTheRoadElec/Phoenix6-Examples/tree/main/cpp/MotionMagic)
