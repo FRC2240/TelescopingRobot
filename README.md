@@ -24,7 +24,7 @@ The motors and sensors to be managed by software:
 [CAD Model](https://cad.onshape.com/documents/4d710722a1c08d2223b9b94e/w/f9fa40dc0aa2859fc1ab7423/e/14256537db7ab81e47c7cd3b)
 
 ## Actions
-* Rotate Arm to value
+* Rotate Arm to value (Uses Motion Magic Controls)
 * Telescope Arm to value
 * Rotate Hand to value
 * Set rollers to Intake/Eject/None

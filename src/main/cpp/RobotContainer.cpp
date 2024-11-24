@@ -5,13 +5,25 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/Commands.h>
+#include <iostream>
 
-RobotContainer::RobotContainer() {
+RobotContainer::RobotContainer()
+{
   ConfigureBindings();
 }
 
-void RobotContainer::ConfigureBindings() {}
+void RobotContainer::ConfigureBindings()
+{
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+  // DO THIS NEXT
+  m_stick.Button(1).OnTrue(ScoreTopCommand);
+  m_stick.Button(2).OnTrue(StowedCommand);
+
+}
+
+
+
+frc2::CommandPtr RobotContainer::GetAutonomousCommand()
+{
   return frc2::cmd::Print("No autonomous command configured");
 }
