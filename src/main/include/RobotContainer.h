@@ -5,9 +5,9 @@
 #pragma once
 
 #include "subsystems/Arm.h"
-#include "subsystems/Hand.h"
-#include "subsystems/Shoulder.h"
-#include "commands/MoveTo.h"
+// #include "subsystems/Hand.h"
+// #include "subsystems/Shoulder.h"
+// #include "commands/MoveTo.h"
 #include "Config.h"
 
 #include <frc2/command/CommandPtr.h>
@@ -20,16 +20,19 @@ class RobotContainer {
 
   frc2::CommandPtr GetAutonomousCommand();
 
+  void SetPID();
+  Arm m_arm;
+
  private:
   void ConfigureBindings();
 
 
   frc2::CommandXboxController m_stick{0};
 
-  Arm m_arm;
-  Hand m_hand;
-  Shoulder m_shoulder;
+  //Hand m_hand;
+  //Shoulder m_shoulder;
 
+  /*
   MoveTo* StowedCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::STOWED);
 
   MoveTo* PickupFloorCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::PICKUP_FLOOR);
@@ -38,5 +41,6 @@ class RobotContainer {
   MoveTo* ScoreFloorCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::SCORE_FLOOR);
   MoveTo* ScoreMiddleCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::SCORE_MIDDLE);
   MoveTo* ScoreTopCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::SCORE_TOP);
+  */
   
 };

@@ -11,13 +11,16 @@ void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
+  frc::SmartDashboard::PutString("command", m_container.m_arm.GetCurrentCommand()->GetName());
 }
 
 void Robot::DisabledInit() {}
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::DisabledExit() {}
+void Robot::DisabledExit() {
+  m_container.SetPID();
+}
 
 void Robot::AutonomousInit() {
   m_autonomousCommand = m_container.GetAutonomousCommand();

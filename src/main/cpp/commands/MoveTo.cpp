@@ -19,7 +19,7 @@ MoveTo::MoveTo(Arm* arm, Hand* hand, Shoulder* shoulder, config::Pose pose) {
 
 // Called when the command is initially scheduled.
 void MoveTo::Initialize() {
-  arm->MoveTo(this->pose.armPosition);
+  // arm->MoveTo(this->pose.armPosition);
   shoulder->MoveTo(this->pose.shoulderPosition);
   hand->MoveTo(this->pose.handPosition);
   hand->SetRollers(this->pose.rollerState);

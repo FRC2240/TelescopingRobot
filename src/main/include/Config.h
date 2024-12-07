@@ -9,7 +9,7 @@ namespace config
 
   namespace ARM
   {
-    constexpr int ARM_MOTOR_ID = 1;
+    constexpr int ARM_MOTOR_ID = 31;
   }
 
   namespace SHOULDER

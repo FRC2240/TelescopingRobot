@@ -4,33 +4,43 @@
 
 Arm::Arm()
 {
-    ctre::phoenix6::configs::TalonFXConfiguration configs{};
+    // Motor telescopeMotor{&m_TelescopeMotor, "Telescope Motor", PIDValue};
+    // AddPID(telescopeMotor);
+    ctre::phoenix6::configs::TalonFXConfiguration m_conf{};
+    m_conf.Slot0.kP=1;
+    m_TelescopeMotor.GetConfigurator().Apply(m_conf);
 
-    /* Torque-based velocity does not require a feed forward, as torque will accelerate the rotor up to the desired velocity by itself */
-    configs.Slot0.kS = 2.5; // To account for friction, add 2.5 A of static feedforward
-    configs.Slot0.kP = 5;   // An error of 1 rotation per second results in 5 A output
-    configs.Slot0.kI = 0;   // No output for integrated error
-    configs.Slot0.kD = 0;   // No output for error derivative
-    // Peak output of 40 A
-    configs.TorqueCurrent.PeakForwardTorqueCurrent = 40;
-    configs.TorqueCurrent.PeakReverseTorqueCurrent = -40;
-
-    /* Retry config apply up to 5 times, report if failure */
-    ctre::phoenix::StatusCode status = ctre::phoenix::StatusCode::StatusCodeNotInitialized;
-    for (int i = 0; i < 5; ++i)
-    {
-        status = m_TelescopeMotor.GetConfigurator().Apply(configs);
-        if (status.IsOK())
-            break;
-    }
-    if (!status.IsOK())
-    {
-        std::cout << "Could not apply configs, error code: " << status.GetName() << std::endl;
-    }
     m_TelescopeMotor.SetPosition(0_tr);
 }
 
-void Arm::MoveTo(units::angle::turn_t turns)
+void Arm::Periodic()
 {
-    m_TelescopeMotor.SetControl(m_positionTorque.WithPosition(turns));
+    frc::SmartDashboard::PutNumber("Position", m_TelescopeMotor.GetPosition().GetValueAsDouble());
+}
+
+/*
+Function for init (PutNumber)
+Function in periodic (Track changes in SD & apply them)
+*/
+
+void Arm::MoveTo(units::angular_velocity::turns_per_second_t turns)
+{
+    m_TelescopeMotor.SetControl(m_positionTorque.WithVelocity(turns));
+}
+
+frc2::CommandPtr Arm::IdleCommand()
+{
+    return frc2::RunCommand([this] -> void
+                            { 
+                                MoveTo(0_tps); 
+                                frc::SmartDashboard::PutBoolean("on", false); },
+                            {this}).WithName("idle");
+}
+
+frc2::CommandPtr Arm::ActiveCommand()
+{
+    return frc2::cmd::Run([this] -> void
+                            { 
+                                MoveTo(180_tps); 
+                                frc::SmartDashboard::PutBoolean("on", true); }).WithName("active");
 }
