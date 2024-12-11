@@ -1,10 +1,10 @@
 #include "subsystems/Hand.h"
-#include <iostream>
+
 
 
 Hand::Hand()
 {
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
     ctre::phoenix6::configs::TalonFXConfiguration configs{};
     configs.Slot0.kP = 60; 
     configs.Slot0.kI = 0;  
@@ -12,7 +12,7 @@ Hand::Hand()
     configs.TorqueCurrent.PeakForwardTorqueCurrent = 120;
     configs.TorqueCurrent.PeakReverseTorqueCurrent = -120;
 
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
 
 }
 
@@ -51,4 +51,9 @@ frc2::CommandPtr Hand:score_high() {
      return frc2::cmd::Run([this]
                                 move(CONSTANTS::Hand::SCORE_HIGH);,
                           {this});
+}
+
+void Hand::move(units::angle::turn_t desired) 
+{
+      m_fx.SetControl(m_positionTorque.WithPosition(desired));
 }
