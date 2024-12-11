@@ -9,7 +9,8 @@
 #include "Constants.h"
 
 
-class Arm  : public frc2:SubsystemBase
+
+class Arm  : public frc2::SubsystemBase
 {
     public:
     frc2::CommandPtr IdleCommand();
@@ -18,9 +19,11 @@ class Arm  : public frc2:SubsystemBase
     frc2::CommandPtr score_floor();
     frc2::CommandPtr score_mid();
     frc2::CommandPtr score_high();
-    void move(units::angle::turn_t desired);
 
     private:
-        ctre::phoenix6::hardware::TalonFX m_motor{CONSTANTS::ARM::CAN_ID_MOTOR, "rio"}
+        ctre::phoenix6::hardware::TalonFX m_motor{CONSTANTS::ARM::CAN_ID_MOTOR, "rio"};
+
+        void move(units::angle::turn_t desired);
+
 
 };

@@ -1,10 +1,10 @@
 #include "subsystems/Elbow.h"
-#include <iostream>
 
 
-ELBOW::Elbow()
+
+Elbow::Elbow()
 {
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
     ctre::phoenix6::configs::TalonFXConfiguration configs{};
     configs.Slot0.kP = 60; 
     configs.Slot0.kI = 0;  
@@ -12,7 +12,7 @@ ELBOW::Elbow()
     configs.TorqueCurrent.PeakForwardTorqueCurrent = 120;
     configs.TorqueCurrent.PeakReverseTorqueCurrent = -120;
 
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
 
 }
 
@@ -51,4 +51,9 @@ frc2::CommandPtr Elbow:score_high() {
      return frc2::cmd::Run([this]
                                 move(CONSTANTS::Elbow::SCORE_HIGH);,
                           {this});
+}
+
+void Elbow::move(units::angle::turn_t desired) 
+{
+      m_fx.SetControl(m_positionTorque.WithPosition(desired));
 }

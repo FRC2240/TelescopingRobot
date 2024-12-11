@@ -1,10 +1,9 @@
 #include "subsystems/Arm.h"
-#include <iostream>
 
 
 Arm::Arm()
 {
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
     ctre::phoenix6::configs::TalonFXConfiguration configs{};
     configs.Slot0.kP = 60; 
     configs.Slot0.kI = 0;  
@@ -12,7 +11,7 @@ Arm::Arm()
     configs.TorqueCurrent.PeakForwardTorqueCurrent = 120;
     configs.TorqueCurrent.PeakReverseTorqueCurrent = -120;
 
-    m_moter.SetPosition(0_tr);
+    m_motor.SetPosition(0_tr);
 
 }
 
@@ -51,4 +50,9 @@ frc2::CommandPtr Arm:score_high() {
      return frc2::cmd::Run([this]
                                 move(CONSTANTS::Arm::SCORE_HIGH);,
                           {this});
+}
+
+void Arm::move(units::angle::turn_t desired) 
+{
+      m_fx.SetControl(m_positionTorque.WithPosition(desired));
 }
