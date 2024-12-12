@@ -26,7 +26,9 @@ void MoveTo::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveTo::Execute() {}
+void MoveTo::Execute() {
+  arm->MoveTo(pose.armPosition);
+}
 
 // Called once the command ends or is interrupted.
 void MoveTo::End(bool interrupted) {}

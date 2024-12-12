@@ -2,6 +2,7 @@
 
 #include <units/angle.h>
 #include <units/angular_velocity.h>
+#include <BetterSubsystemBase.h>
 
 namespace config
 {
@@ -10,6 +11,7 @@ namespace config
   namespace ARM
   {
     constexpr int ARM_MOTOR_ID = 31;
+    constexpr BetterSubsystemBase::PIDConfig ARM_MOTOR_PID {0.5, 10, 0.2, 1};
   }
 
   namespace SHOULDER
@@ -26,6 +28,9 @@ namespace config
 
     constexpr units::angular_velocity::turns_per_second_t ROLLER_EJECT_TR = -1_tps;
     constexpr units::angular_velocity::turns_per_second_t ROLLER_INTAKE_TR = 1_tps;
+
+    constexpr BetterSubsystemBase::PIDConfig ROLLER_MOTOR_PID {0, 0, 0, 0};
+    constexpr BetterSubsystemBase::PIDConfig WRIST_MOTOR_PID {0, 0, 0, 0};
 
     enum ROLLER_STATE
     {

@@ -2,10 +2,11 @@
 
 #include "Config.h"
 #include <frc2/command/SubsystemBase.h>
+#include "BetterSubsystemBase.h"
 #include "ctre/phoenix6/TalonFX.hpp"
 #include <units/angle.h>
 
-class Hand : public frc2::SubsystemBase {
+class Hand : public BetterSubsystemBase {
   public:
     Hand();
 
@@ -21,5 +22,8 @@ class Hand : public frc2::SubsystemBase {
 
     ctre::phoenix6::controls::PositionTorqueCurrentFOC m_positionTorque = ctre::phoenix6::controls::PositionTorqueCurrentFOC{0_tr}.WithSlot(0);
     ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_velocityTorque = ctre::phoenix6::controls::VelocityTorqueCurrentFOC{0_tps}.WithSlot(0);
+
+    PIDConfig wristPID = config::HAND::WRIST_MOTOR_PID;
+    PIDConfig rollerPID = config::HAND::ROLLER_MOTOR_PID;
 };
 

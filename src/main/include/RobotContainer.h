@@ -5,7 +5,7 @@
 #pragma once
 
 #include "subsystems/Arm.h"
-// #include "subsystems/Hand.h"
+#include "subsystems/Hand.h"
 // #include "subsystems/Shoulder.h"
 // #include "commands/MoveTo.h"
 #include "Config.h"
@@ -22,6 +22,8 @@ class RobotContainer {
 
   void SetPID();
   Arm m_arm;
+  Hand m_hand;
+  //Shoulder m_shoulder;
 
  private:
   void ConfigureBindings();
@@ -29,8 +31,7 @@ class RobotContainer {
 
   frc2::CommandXboxController m_stick{0};
 
-  //Hand m_hand;
-  //Shoulder m_shoulder;
+  
 
   /*
   MoveTo* StowedCommand = new MoveTo(&m_arm, &m_hand, &m_shoulder, config::POSES::STOWED);

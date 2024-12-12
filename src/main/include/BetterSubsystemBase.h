@@ -17,6 +17,7 @@ public:
     double kP = 0;
     double kI = 0;
     double kD = 0;
+    double kG = 0;
   };
 
   struct Motor
@@ -29,6 +30,7 @@ public:
       frc::SmartDashboard::PutNumber(name + "/kP", pid.kP);
       frc::SmartDashboard::PutNumber(name + "/kI", pid.kI);
       frc::SmartDashboard::PutNumber(name + "/kD", pid.kD);
+      frc::SmartDashboard::PutNumber(name + "/kG", pid.kG);
     };
     PIDConfig GetDashboard() {
       PIDConfig config;
@@ -36,6 +38,8 @@ public:
       config.kP = frc::SmartDashboard::GetNumber(name + "/kP", pid.kP);
       config.kI = frc::SmartDashboard::GetNumber(name + "/kI", pid.kI);
       config.kD = frc::SmartDashboard::GetNumber(name + "/kD", pid.kD);
+      config.kG = frc::SmartDashboard::GetNumber(name + "/kG", pid.kG);
+
       return config;
     }
   };
@@ -46,8 +50,6 @@ public:
 
   // Call inside of robotContainer setPID
   void SetPID();
-
-
 
 private:
   std::vector<Motor> motors;

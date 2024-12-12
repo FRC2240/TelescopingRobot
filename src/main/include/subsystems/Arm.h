@@ -15,13 +15,13 @@
 #include <iostream>
 
 
-class Arm : public frc2::SubsystemBase {
+class Arm : public BetterSubsystemBase {
   public:
 
     Arm();
     void Periodic() override;
 
-    void MoveTo(units::angular_velocity::turns_per_second_t turns);
+    void MoveTo(units::angle::turn_t turns);
 
     frc2::CommandPtr IdleCommand();
     frc2::CommandPtr ActiveCommand();
@@ -30,7 +30,7 @@ class Arm : public frc2::SubsystemBase {
     units::angle::turn_t rotations = 0_tr;
 
     ctre::phoenix6::hardware::TalonFX m_TelescopeMotor{config::ARM::ARM_MOTOR_ID, config::CANBUS_NAME};
-    ctre::phoenix6::controls::VelocityTorqueCurrentFOC m_positionTorque = ctre::phoenix6::controls::VelocityTorqueCurrentFOC{0_tps}.WithSlot(0);
+    ctre::phoenix6::controls::PositionTorqueCurrentFOC m_positionTorque = ctre::phoenix6::controls::PositionTorqueCurrentFOC{0_tr}.WithSlot(0);
 
-    // PIDConfig PIDValue {1, 0, 0, 0};
+    PIDConfig PIDValue = config::ARM::ARM_MOTOR_PID;
 };

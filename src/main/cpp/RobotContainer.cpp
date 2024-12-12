@@ -13,7 +13,7 @@ RobotContainer::RobotContainer()
 }
 
 void RobotContainer::SetPID() {
-  // m_arm.SetPID();
+  m_arm.SetPID();
 }
 
 void RobotContainer::ConfigureBindings()
@@ -26,8 +26,8 @@ void RobotContainer::ConfigureBindings()
   */
 
   // m_arm.SetDefaultCommand(m_arm.IdleCommand());
-  m_stick.A().ToggleOnTrue(m_arm.ActiveCommand().AndThen(m_arm.IdleCommand()));
-    // m_stick.B().ToggleOnTrue(m_arm.IdleCommand()).Debounce(20_ms);
+  m_stick.A().ToggleOnTrue(m_arm.ActiveCommand()).WhileFalse(m_arm.IdleCommand());
+  // m_stick.B().ToggleOnTrue(m_arm.IdleCommand()).Debounce(20_ms);
 
 
 }

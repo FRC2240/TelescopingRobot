@@ -4,8 +4,8 @@
 
 Arm::Arm()
 {
-    // Motor telescopeMotor{&m_TelescopeMotor, "Telescope Motor", PIDValue};
-    // AddPID(telescopeMotor);
+    Motor telescopeMotor{&m_TelescopeMotor, "Telescope Motor", PIDValue};
+    AddPID(telescopeMotor);
     ctre::phoenix6::configs::TalonFXConfiguration m_conf{};
     m_conf.Slot0.kP=1;
     m_TelescopeMotor.GetConfigurator().Apply(m_conf);
@@ -23,16 +23,18 @@ Function for init (PutNumber)
 Function in periodic (Track changes in SD & apply them)
 */
 
-void Arm::MoveTo(units::angular_velocity::turns_per_second_t turns)
+void Arm::MoveTo(units::angle::turn_t turns)
 {
-    m_TelescopeMotor.SetControl(m_positionTorque.WithVelocity(turns));
+    m_TelescopeMotor.SetControl(m_positionTorque.WithPosition(turns));
 }
 
 frc2::CommandPtr Arm::IdleCommand()
 {
     return frc2::RunCommand([this] -> void
                             { 
-                                MoveTo(0_tps); 
+                                MoveTo(0_tr);
+                                //m_TelescopeMotor.SetControl(m_positionTorque.WithVelocity(0_tr));
+                                //std::cout << "idle" << std::endl;
                                 frc::SmartDashboard::PutBoolean("on", false); },
                             {this}).WithName("idle");
 }
@@ -41,6 +43,8 @@ frc2::CommandPtr Arm::ActiveCommand()
 {
     return frc2::cmd::Run([this] -> void
                             { 
-                                MoveTo(180_tps); 
+                                MoveTo(180_tr); 
+                                //std::cout << "active" << std::endl;
+                                //m_TelescopeMotor.SetControl(m_positionTorque.WithVelocity(180_tr));
                                 frc::SmartDashboard::PutBoolean("on", true); }).WithName("active");
 }
