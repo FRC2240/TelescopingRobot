@@ -1,23 +1,23 @@
-#include "BetterSubsystemBase.h"
+#include "utility/BetterSubsystemBase.h"
 #include <iostream>
 
-void BetterSubsystemBase::AddPID(Motor motor) {
-  std::vector<Motor> motorVec {motor};
+void BetterSubsystemBase::AddPID(MotorUtils::Motor motor) {
+  std::vector<MotorUtils::Motor> motorVec {motor};
   AddPID(motorVec);
 }
 
-void BetterSubsystemBase::AddPID(std::vector<Motor> motors) {
+void BetterSubsystemBase::AddPID(std::vector<MotorUtils::Motor> motors) {
   this->motors = motors;
 
   for (int i = 0; i < this->motors.size(); i++) {
-    this->motors.at(i).PutDashboard();
+    this->motors.at(i).MotorUtils::Motor::PutDashboard();
   }
 }
 
 void BetterSubsystemBase::SetPID() {
   for (int i = 0; i < motors.size(); i++) {
     ctre::phoenix6::configs::TalonFXConfiguration configs{};
-    PIDConfig PIDValue = motors.at(i).GetDashboard();
+    MotorUtils::PIDValues PIDValue = motors.at(i).GetDashboard();
     configs.Slot0.kS = PIDValue.kS; 
     configs.Slot0.kP = PIDValue.kP; 
     configs.Slot0.kI = PIDValue.kI; 
@@ -37,3 +37,8 @@ void BetterSubsystemBase::SetPID() {
   }
 }
 
+void BetterSubsystemBase::LogDashboard() {
+  for (int i = 0; i < motors.size(); i++) {
+    motors.at(i).LogDashboard();
+  }
+}

@@ -15,6 +15,9 @@ RobotContainer::RobotContainer()
 void RobotContainer::SetPID() {
   m_arm.SetPID();
 }
+void RobotContainer::LogDashboard() {
+  m_arm.LogDashboard();
+}
 
 void RobotContainer::ConfigureBindings()
 {

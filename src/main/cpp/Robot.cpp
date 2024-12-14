@@ -11,7 +11,7 @@ void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  frc::SmartDashboard::PutString("command", m_container.m_arm.GetCurrentCommand()->GetName());
+  
 }
 
 void Robot::DisabledInit() {}
@@ -30,7 +30,9 @@ void Robot::AutonomousInit() {
   }
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() {
+  m_container.LogDashboard();
+}
 
 void Robot::AutonomousExit() {}
 
@@ -40,7 +42,9 @@ void Robot::TeleopInit() {
   }
 }
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  m_container.LogDashboard();
+}
 
 void Robot::TeleopExit() {}
 
@@ -48,7 +52,9 @@ void Robot::TestInit() {
   frc2::CommandScheduler::GetInstance().CancelAll();
 }
 
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic() {
+  m_container.LogDashboard();
+}
 
 void Robot::TestExit() {}
 

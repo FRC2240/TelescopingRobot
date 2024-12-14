@@ -21,6 +21,7 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
 
   void SetPID();
+  void LogDashboard();
   Arm m_arm;
   Hand m_hand;
   //Shoulder m_shoulder;
