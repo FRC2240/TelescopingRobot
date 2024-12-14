@@ -18,6 +18,8 @@ class RobotContainer {
  public:
   RobotContainer();
 
+  frc2::CommandXboxController m_stick{0};
+
   frc2::CommandPtr GetAutonomousCommand();
 
   void SetPID();
@@ -30,7 +32,6 @@ class RobotContainer {
   void ConfigureBindings();
 
 
-  frc2::CommandXboxController m_stick{0};
 
   
 

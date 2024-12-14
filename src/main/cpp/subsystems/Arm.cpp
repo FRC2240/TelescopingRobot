@@ -4,11 +4,10 @@
 
 Arm::Arm()
 {
-    MotorUtils::Motor::LogValues logValues {true, true, false};
+    MotorUtils::Motor::LogValues logValues {true, true, true};
     MotorUtils::Motor telescopeMotor{&m_TelescopeMotor, "Telescope Motor", PIDValue, logValues};
     AddPID(telescopeMotor);
     SetPID();
-
 
     m_TelescopeMotor.SetPosition(0_tr);
 }

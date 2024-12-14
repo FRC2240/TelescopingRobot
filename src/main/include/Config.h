@@ -8,6 +8,7 @@
 
 namespace config
 {
+  constexpr bool IN_MATCH = false;
   static constexpr char const *CANBUS_NAME = "rio";
 
   namespace ARM
@@ -61,5 +62,4 @@ namespace config
     const Pose SCORE_MIDDLE{1_tr, 1_tr, 1_tr, HAND::ROLLER_STATE::EJECT};
     const Pose SCORE_TOP{1_tr, 1_tr, 1_tr, HAND::ROLLER_STATE::EJECT};
   }
-
 }

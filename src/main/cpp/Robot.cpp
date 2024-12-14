@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
+#include "Config.h"
 #include <iostream>
 
 #include <frc2/command/CommandScheduler.h>
@@ -11,7 +12,6 @@ void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  
 }
 
 void Robot::DisabledInit() {}
@@ -19,7 +19,9 @@ void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
 
 void Robot::DisabledExit() {
-  m_container.SetPID();
+  if (!config::IN_MATCH) {
+    m_container.SetPID();
+  }
 }
 
 void Robot::AutonomousInit() {
@@ -44,6 +46,7 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
   m_container.LogDashboard();
+  DriverUtils::DriverTeleopPeriodic();
 }
 
 void Robot::TeleopExit() {}
